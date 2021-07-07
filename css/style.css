@@ -462,11 +462,16 @@ body .news .newsPack .news1 {
 }
 
 body .news .newsPack .news2 {
-  opacity: 0;
+  opacity: 1;
+}
+
+body .news .newsPack .news2 .date {
+  background-color: #000;
+  color: #fff;
 }
 
 body .news .newsPack .news3 {
-  opacity: 0;
+  opacity: 1;
 }
 
 body .news .pageNum {

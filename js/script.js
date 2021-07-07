@@ -114,19 +114,16 @@ let winH = window.innerHeight;
 let navMenu = document.querySelectorAll('.nav_menu');
 let section = document.querySelectorAll('section');
 
+
 function news(){
-    // let newsDate = document.querySelectorAll('.date')
-    // let newstext = document.querySelectorAll('.text')
-    // let newsperson = document.querySelectorAll('.person')
+    let newsDate = document.querySelectorAll('.date')
+    let newsText = document.querySelectorAll('.text')
+    let newsPerson = document.querySelectorAll('.person')
+    let newsArr = document.querySelectorAll('.newsArr');
 
     let newsEffect = function(){
-        let newsDate, newsText, newsPerson, newsArr 
         
         let initModule = function(){
-            newsDate = document.querySelectorAll('.date');
-            newsText = document.querySelectorAll('.text');
-            newsPerson = document.querySelectorAll('.person');
-            newsArr = document.querySelectorAll('.newsArr');
             _addEventHandlers();
         }
         let _addEventHandlers = function(){
@@ -155,22 +152,56 @@ function news(){
         let prevBtn = document.querySelector('.news_left');
         let nextBtn = document.querySelector('.news_right');
         let currentPage = 0;
-        
-        nextBtn.addEventListener('click',newPrevPage)
-
+        let pageNum = document.querySelector('.pageNum p');
         function newPrevPage(){
             if(currentPage == 0){
                 prevBtn.setAttribute('disable','true')
                 prevBtn.style.opacity = '0.2'
-                newsDate1.classList.add('newsEffect');
-                newsText1.classList.add('newsEffect');
-                newsPerson1.classList.add('newsEffect');
             }
             if(currentPage > 0){
                 nextBtn.removeAttribute('disable')
-
+                prevBtn.style.opacity = '1';
+                nextBtn.style.opacity = '1';
+                currentPage = currentPage - 1;
+                newsDate[currentPage+1].classList.remove('newsEffect');
+                newsText[currentPage+1].classList.remove('newsEffect');
+                newsPerson[currentPage+1].classList.remove('newsEffect');
+                newsDate[currentPage].classList.add('newsEffect');
+                newsText[currentPage].classList.add('newsEffect');
+                newsPerson[currentPage].classList.add('newsEffect');
+                pageNum.textContent = `${currentPage} / ${newsArr.length}`
+                console.log(currentPage)
             }
         }
+        function newNextPage(){
+            if(currentPage == 4){
+                nextBtn.setAttribute('disable','true')
+                nextBtn.style.opacity = '0.2'
+            }
+            if(currentPage < 4 ){
+                prevBtn.removeAttribute('disable')
+                prevBtn.style.opacity = '1';
+                nextBtn.style.opacity = '1';
+                currentPage = currentPage + 1;
+                newsDate[currentPage-1].classList.remove('newsEffect');
+                newsText[currentPage-1].classList.remove('newsEffect');
+                newsPerson[currentPage-1].classList.remove('newsEffect');
+                newsDate[currentPage].classList.add('newsEffect');
+                newsText[currentPage].classList.add('newsEffect');
+                newsPerson[currentPage].classList.add('newsEffect');
+                pageNum.textContent = `${currentPage} / ${newsArr.length}`
+                console.log(currentPage)
+            }
+        }
+        function init(){
+            nextBtn.addEventListener('click',newNextPage);
+            prevBtn.addEventListener('click',newPrevPage);
+            prevBtn.setAttribute('disabled','ture')
+            prevBtn.style.opacity = '0.2'
+            pageNum.textContent = `${currentPage} / ${newsArr.length}`
+        }
+        init()
     }
+    newsPage()
 }
 news()

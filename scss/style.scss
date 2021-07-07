@@ -330,10 +330,14 @@ body {
                 opacity: 1;
             }
             .news2 {
-                opacity: 0;
+                opacity: 1;
+                .date {
+                    background-color: #000;
+                    color: #fff;
+                }
             }
             .news3 {
-                opacity: 0;
+                opacity: 1;
             }
         }
         .pageNum {
