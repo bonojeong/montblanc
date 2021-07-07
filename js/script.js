@@ -58,61 +58,119 @@ $(document).ready(function(){
     })
 })
 
+//TheNewest 이미지 슬라이드 !
+
+function ImgSlide(){
+    let leftBtn = document.querySelector('.left_btn');
+    let rightBtn = document.querySelector('.right_btn');
+    let packedSlide = document.querySelector('.slide');
+    let imageIndex = 0;
+    let position = 0;
+    let packedSlide_Width = 372
+
+    function previous(){
+        if(imageIndex > 0){
+            rightBtn.removeAttribute("disabled")
+            position += packedSlide_Width;
+            packedSlide.style.transform = `translateX(${position}px)`;
+            imageIndex = imageIndex - 1;
+            leftBtn.style.opacity = '1';
+            rightBtn.style.opacity = '1';
+        }
+        if(imageIndex == 0){
+            leftBtn.setAttribute('disabled','true')
+            leftBtn.style.opacity = '0.2'
+        }
+    }
+    function next(){
+        if(imageIndex < 5){
+            leftBtn.removeAttribute('disable')
+            position -= packedSlide_Width;
+            packedSlide.style.transform = `translateX(${position}px)`
+            imageIndex = imageIndex + 1;
+            rightBtn.style.opacity = '1';
+            leftBtn.style.opacity = '1';
+        }
+        if(imageIndex == 5){
+            rightBtn.setAttribute('disable','true')
+            rightBtn.style.opacity= '0.2'
+        }
+    }
+    function init(){
+        leftBtn.setAttribute('disabled','true')
+        leftBtn.addEventListener('click',previous)
+        rightBtn.addEventListener('click',next)
+        leftBtn.style.opacity = '0.2'
+    }
+    init()
+}
+ImgSlide()
+
+
+
 
 let winY = window.scrollY;
 let winH = window.innerHeight;
 let navMenu = document.querySelectorAll('.nav_menu');
 let section = document.querySelectorAll('section');
-let sec1Rect = section[0].getBoundingClientRect();
-let sec2Rect = section[1].getBoundingClientRect();
-let sec3Rect = section[2].getBoundingClientRect();
-let sec4Rect = section[3].getBoundingClientRect();
-let sec5Rect = section[4].getBoundingClientRect();
-// -------nav 클릭했을때 이동 ------------
-// function moveSec1(){
-//     window.scrollTo({top:0, behavior:'smooth'});
-// }
-// function moveSec2(){
-//     window.scrollTo({top:969, behavior:'smooth'});
-// }
-// function moveSec3(){
-//     window.scrollTo({top:1938, behavior:'smooth'});
-// }
-// function moveSec4(){
-//     window.scrollTo({top:2907, behavior:'smooth'});
-// }
-// function moveSec5(){
-//     window.scrollTo({top:3876, behavior:'smooth'});
-// }
 
-// ------- news 섹션에 왔을 때 인터렉션 --------
-let newsEffect = function(){
-    let newsDate, newsText, newsPerson
+function news(){
+    // let newsDate = document.querySelectorAll('.date')
+    // let newstext = document.querySelectorAll('.text')
+    // let newsperson = document.querySelectorAll('.person')
 
-    let initModule = function(){
-        newsDate = document.querySelector('.date');
-        newsText = document.querySelector('.text');
-        newsPerson = document.querySelector('.person');
-        _addEventHandlers();
+    let newsEffect = function(){
+        let newsDate, newsText, newsPerson, newsArr 
+        
+        let initModule = function(){
+            newsDate = document.querySelectorAll('.date');
+            newsText = document.querySelectorAll('.text');
+            newsPerson = document.querySelectorAll('.person');
+            newsArr = document.querySelectorAll('.newsArr');
+            _addEventHandlers();
+        }
+        let _addEventHandlers = function(){
+            window.addEventListener('scroll', _checkPosition);
+            window.addEventListener("load", _checkPosition);
+            window.addEventListener("resize", initModule);
+        }
+        var _checkPosition = function () {
+            for (var i = 0; i < section.length; i++) {
+            var posFromTop = section[3].getBoundingClientRect().top;
+            if (winH > posFromTop+500) {
+                newsDate[0].classList.add('newsEffect');
+                newsText[0].classList.add('newsEffect');
+                newsPerson[0].classList.add('newsEffect');
+            }
+            }
+        }
+        return {
+            init: initModule
+        }
     }
-    let _addEventHandlers = function(){
-        window.addEventListener('scroll', _checkPosition);
-    }
-    let _checkPosition = function (){
-        for( let i=0; i<section.length; i++ ){
-            let posFromTop4 = section[3].getBoundingClientRect().top;
-            if(winH > posFromTop4 + 700) {
-                newsDate.classList.add('newsEffect');
-                newsText.classList.add('newsEffect');
-                newsPerson.classList.add('newsEffect');
+    newsEffect().init();
+
+
+    function newsPage(){
+        let prevBtn = document.querySelector('.news_left');
+        let nextBtn = document.querySelector('.news_right');
+        let currentPage = 0;
+        
+        nextBtn.addEventListener('click',newPrevPage)
+
+        function newPrevPage(){
+            if(currentPage == 0){
+                prevBtn.setAttribute('disable','true')
+                prevBtn.style.opacity = '0.2'
+                newsDate1.classList.add('newsEffect');
+                newsText1.classList.add('newsEffect');
+                newsPerson1.classList.add('newsEffect');
+            }
+            if(currentPage > 0){
+                nextBtn.removeAttribute('disable')
+
             }
         }
     }
-    return {
-        init: initModule
-    }
 }
-newsEffect().init();
-
-// ----------어두운 섹션에 위치해 있을 때 nav 색상 변경 ----------
-
+news()
