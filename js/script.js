@@ -13,6 +13,7 @@ $(document).ready(function(){
     
     let html = $("html");
     let page = 1;
+    let vH = window.innerHeight
     let lastPage = $(".section").length+1;
     html.animate({scrollTop:0},10);
 
@@ -26,7 +27,7 @@ $(document).ready(function(){
             if(page == 1) return;
             page --
         }
-        let posTop = (page-1) * 969;
+        let posTop = (page-1) * vH;
         html.animate({scrollTop : posTop});
 
         if(page == 1){
@@ -114,7 +115,7 @@ let winH = window.innerHeight;
 let navMenu = document.querySelectorAll('.nav_menu');
 let section = document.querySelectorAll('section');
 
-
+    //newsPage event
 function news(){
     let newsDate = document.querySelectorAll('.date')
     let newsText = document.querySelectorAll('.text')
@@ -148,48 +149,55 @@ function news(){
     newsEffect().init();
 
 
+//페이지 넘기기
     function newsPage(){
         let prevBtn = document.querySelector('.news_left');
         let nextBtn = document.querySelector('.news_right');
         let currentPage = 0;
+        let currentPageNum = 1;
         let pageNum = document.querySelector('.pageNum p');
         function newPrevPage(){
-            if(currentPage == 0){
-                prevBtn.setAttribute('disable','true')
-                prevBtn.style.opacity = '0.2'
-            }
             if(currentPage > 0){
                 nextBtn.removeAttribute('disable')
                 prevBtn.style.opacity = '1';
                 nextBtn.style.opacity = '1';
                 currentPage = currentPage - 1;
+                currentPageNum = currentPageNum - 1;
                 newsDate[currentPage+1].classList.remove('newsEffect');
                 newsText[currentPage+1].classList.remove('newsEffect');
                 newsPerson[currentPage+1].classList.remove('newsEffect');
                 newsDate[currentPage].classList.add('newsEffect');
                 newsText[currentPage].classList.add('newsEffect');
                 newsPerson[currentPage].classList.add('newsEffect');
-                pageNum.textContent = `${currentPage} / ${newsArr.length}`
+                pageNum.textContent = `${currentPageNum} / ${newsArr.length}`
+                console.log(currentPage)
+            }
+            if(currentPage == 0){
+                prevBtn.setAttribute('disable','true')
+                prevBtn.style.opacity = '0.2'
                 console.log(currentPage)
             }
         }
         function newNextPage(){
-            if(currentPage == 4){
-                nextBtn.setAttribute('disable','true')
-                nextBtn.style.opacity = '0.2'
-            }
             if(currentPage < 4 ){
                 prevBtn.removeAttribute('disable')
+                nextBtn.style.opacity = '0.2'
                 prevBtn.style.opacity = '1';
                 nextBtn.style.opacity = '1';
                 currentPage = currentPage + 1;
+                currentPageNum = currentPageNum+1
                 newsDate[currentPage-1].classList.remove('newsEffect');
                 newsText[currentPage-1].classList.remove('newsEffect');
                 newsPerson[currentPage-1].classList.remove('newsEffect');
                 newsDate[currentPage].classList.add('newsEffect');
                 newsText[currentPage].classList.add('newsEffect');
                 newsPerson[currentPage].classList.add('newsEffect');
-                pageNum.textContent = `${currentPage} / ${newsArr.length}`
+                pageNum.textContent = `${currentPageNum} / ${newsArr.length}`
+                console.log(currentPage)
+            }
+            if(currentPage == 4){
+                nextBtn.setAttribute('disable','true')
+                nextBtn.style.opacity = '0.2'
                 console.log(currentPage)
             }
         }
@@ -198,9 +206,9 @@ function news(){
             prevBtn.addEventListener('click',newPrevPage);
             prevBtn.setAttribute('disabled','ture')
             prevBtn.style.opacity = '0.2'
-            pageNum.textContent = `${currentPage} / ${newsArr.length}`
+            pageNum.textContent = `${currentPageNum} / ${newsArr.length}`
         }
-        init()
+        init();
     }
     newsPage()
 }
