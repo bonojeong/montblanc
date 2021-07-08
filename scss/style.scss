@@ -420,14 +420,15 @@ body {
                 }
             }
             .speacial_upper{
-                    display: flex;
-                    justify-content: space-between;
+                display: flex;
+                justify-content: space-between;
             }
             .speacial_lower {
                 background-color: #000;
                 display: flex;
                 > div {
                     width: 50%;
+                    height: 100%;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
@@ -611,7 +612,7 @@ body {
 }
 
 /* PC , 테블릿 가로 (해상도 768px ~ 1024px)*/
-@media (min-width:768px) and (max-width:1024px) {
+@media all and (min-width:769px) and (max-width:1024px) {
     body{
         header{ 
             nav {
@@ -651,9 +652,67 @@ body {
                         }
                     }
                 }
+                .speacial_lower{
+                    .new_account{
+                        justify-content: center;
+                        padding: 0;
+                        h2{
+                            padding-bottom: 25px;
+                        }
+                        .makeAccount{
+                            width: 100%;
+                            height: 90px;
+                            font-size: 14px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                    }
+                    .coupon{
+                        width: 50%;
+                        padding: 0;
+                        justify-content: center;
+                        h2{
+                            width: 80%;
+                            text-align: center;
+                        }
+                        .emailForm{
+                            width: 100%;
+                            height: 90px;
+                            display: flex;
+                            align-items: center;
+                            a{
+                                width: 110px;
+                                p{
+                                    padding: 0;
+                                }
+                            }
+                        }
+                        .confirm{
+                            width: 50%;
+                            text-align: center;
+                        }
+                    }
+                }
             }
         }
     }
         
 
+}
+/* 모바일 가로, 테블릿 세로 (해상도 480px ~ 767px)*/ 
+@media all and (min-width:480px) and (max-width:768px) {
+    body{
+        header{ 
+            nav {
+                font-size: 14px;
+                width: 30px;
+            } 
+        }
+        main{
+            .new_collection{
+                
+            }
+        }
+    }
 }
