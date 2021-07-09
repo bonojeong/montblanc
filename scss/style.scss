@@ -125,6 +125,7 @@ body {
                 }
             }
             .new_list {
+                display: block;
                 height: 60%;
                 width: 80%;
                 margin: 0 auto;
@@ -136,13 +137,16 @@ body {
                     position: relative;
                     .slide {
                         height: 100%;
-                        width: 3348px;
+                        width: 300%;
                         display: flex;
                         align-items: center;
                         transition: 0.5s;
                         .new {
+                            width: 6.5%;
                             margin: 0 40px;
-                            // 개당+마진  292+80px = 372
+                            img{
+                                width: 100%;
+                            }
                             p{
                                 padding-top: 20px;
                                 font-size: 16px;
@@ -172,7 +176,9 @@ body {
                     }
                 }
             }
-            
+            .new_list_scroll_under768px {
+                display: none;
+            }
         }
     }
     .product {
@@ -612,7 +618,7 @@ body {
 }
 
 /* PC , 테블릿 가로 (해상도 768px ~ 1024px)*/
-@media all and (min-width:769px) and (max-width:1024px) {
+@media (min-width:768px) and (max-width:1024px) {
     body{
         header{ 
             nav {
@@ -711,6 +717,206 @@ body {
         }
         main{
             .new_collection{
+                >div{
+                    .new_list{
+                        display: none;
+                        .slide_view{
+                            .slide{
+                                .new{
+                                    width: 100%;
+                                }
+                            }
+                        }
+                    }
+                    .new_list_scroll_under768px {
+                        display: block;
+                        width: 100%;
+                        height: 60%;
+                        .new_list_scroll_under768px_div{
+                            display: flex;
+                            width: 100%;
+                            height: 100%;
+                            justify-content: center;
+                            align-items: center;
+                            .scroll_view{
+                                position: relative;
+                                overflow: hidden;
+                                width: 60%;
+                                height: 90%;
+                                z-index: 10;
+                                .scrollArr{
+                                    position: absolute;
+                                    top: 0px;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 270%;
+                                    display: flex;
+                                    flex-wrap: wrap;
+                                    justify-content: space-evenly;
+                                    pointer-events: none;
+                                    .scrollImg{
+                                        width: 40%;
+                                        height: 15%;
+                                        overflow: hidden;
+                                        position: relative;
+                                        margin-bottom: 10px;
+                                        // pointer-events: auto;
+                                        &:hover .scrollBg{
+                                            transform: translateX(0%);   
+                                        }
+                                        img{
+                                            width: 100%;
+                                        }
+                                        .scrollBg{
+                                            background: rgba(0, 0, 0, 0.5);
+                                            width: 100%;
+                                            height: 100%;
+                                            position: absolute;
+                                            top: 0;
+                                            left: 0;
+                                            color: #fff;
+                                            font-size: 16px;
+                                            text-align: center;
+                                            display: flex;
+                                            align-items: center;
+                                            transform: translateX(101%);
+                                            transition: 0.5s;
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .product {  
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                ul {
+                    height: 85%;
+                    width: 70%;
+                    margin: 0 auto;
+                    display: flex;
+                    li{
+                        width: 40%;
+                    }
+                }
+            }
+            .news {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                .newsPack{
+                    width: 80%;
+                    height: 75%;
+                    // margin: 0 auto;
+                    .newsArr{
+                        width: 100%;
+                        display: flex;
+                        left: 0;
+                        padding: 0;
+                        justify-content: none;
+                        .date{
+                            width: 100px;
+                            height: 100px;
+                        }
+                        .text{
+                            width: 70%;
+                            em{
+                                font-size: 24px;
+                            }
+                            .name {
+                                padding: 10px 0;
+                                span{
+                                    display: block;
+                                }
+                            }
+                            .saying{
+                                font-size: 16px;
+                            }
+                            .saying1{
+                                padding-top: 30px;
+                                padding: 10px 0 ;
+                            }
+                        }
+                        .person{
+                            width: 20%;
+                        }
+                    }
+                }
+                .pageNum {
+                    position: inherit;
+                    bottom: 0;
+                    left: -20px;
+                    transform: translateX(0%);
+                }
+            }
+            .speacial{
+                .speacial_wrap{
+                    > div{
+                        .present{
+                            h3{
+                                font-size: 24px;
+                            }
+                            .present_more{
+                                width: 80%;
+                                height: 15%;
+                                padding: 0;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            }
+                        }
+                        .post{
+                            h3{
+                                font-size: 24px;
+                                margin-bottom: 30px;
+                            }
+                            .post_more{
+                                width: 80%;
+                                height: 15%;
+                                padding: 0;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            }
+                        }
+                    }
+                    .speacial_lower{
+                        .new_account{
+                            .new_account_p1{
+                                padding: 0 ;
+                                padding-top: 25px;
+                                padding-bottom: 50px;
+                            }
+                            .makeAccount{
+                                padding: 0;
+                            }
+                        }
+                        .coupon{
+                            padding: 0;
+                            h3{
+                                width: 80%;
+                                text-align: center;
+                            }
+                            .emailForm{
+                                justify-content: center;
+                                padding: 0;
+                            }
+                            .confirm{
+                                width: 100%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        footer{
+            .footer_upper{
                 
             }
         }

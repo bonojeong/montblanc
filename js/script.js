@@ -67,12 +67,13 @@ function ImgSlide(){
     let packedSlide = document.querySelector('.slide');
     let imageIndex = 0;
     let position = 0;
-    let packedSlide_Width = 372
-
+    let imgs = document.querySelector('.new1')
+    let packedSlide_Width = imgs.getBoundingClientRect();
+    
     function previous(){
         if(imageIndex > 0){
             rightBtn.removeAttribute("disabled")
-            position += packedSlide_Width;
+            position += packedSlide_Width.width+80;
             packedSlide.style.transform = `translateX(${position}px)`;
             imageIndex = imageIndex - 1;
             leftBtn.style.opacity = '1';
@@ -86,7 +87,7 @@ function ImgSlide(){
     function next(){
         if(imageIndex < 5){
             leftBtn.removeAttribute('disable')
-            position -= packedSlide_Width;
+            position -= packedSlide_Width.width+80;
             packedSlide.style.transform = `translateX(${position}px)`
             imageIndex = imageIndex + 1;
             rightBtn.style.opacity = '1';
@@ -107,6 +108,52 @@ function ImgSlide(){
 }
 ImgSlide()
 
+
+///////////// 반응형 new product 드래그 이벤트/////////
+function NewProductScrollEvent(){
+    const scrollArr = document.querySelector('.scrollArr');
+    const scroll_view = document.querySelector('.scroll_view');
+    let isMouseDown = false;
+    let startY
+    let Y
+
+    scroll_view.addEventListener('mousedown', e =>{
+        isMouseDown = true;
+        startY = e.offsetY - scrollArr.offsetTop
+        scroll_view.style.cursor = 'grabbing'
+    })
+
+    scroll_view.addEventListener('mouseenter', () =>{
+        scroll_view.style.cursor="grab"
+    })
+
+    scroll_view.addEventListener('mouseup',() => {
+        scroll_view.style.cursor = 'grab'
+    })
+
+    window.addEventListener('mouseup', () => {
+        isMouseDown = false;
+    })
+    scroll_view.addEventListener('mousemove', e => {
+        if(!isMouseDown) return
+        e.preventDefault()
+        Y = e.offsetY
+        scrollArr.style.top = `${Y - startY}px`;
+        checkboundary()
+    })
+
+    function checkboundary(){
+        let outer = scroll_view.getBoundingClientRect()
+        let inner = scrollArr.getBoundingClientRect()
+
+        if(parseInt(scrollArr.style.top) > 0){
+            scrollArr.style.top = '0px'
+        }else if (inner.bottom < outer.bottom){
+            scrollArr.style.top = `-${inner.height - outer.height}px`
+        }
+    }
+}
+NewProductScrollEvent()
 
 
 
