@@ -746,14 +746,14 @@ body footer {
   background: #444;
 }
 
-body footer > div {
+body footer .footer_upper {
   width: 80%;
   height: 85%;
   margin: 0 auto;
   padding: 100px 0;
 }
 
-body footer > div .map_bg {
+body footer .footer_upper .map_bg {
   height: 60%;
   background: url("../images/footer1.png") center center/contain no-repeat;
   display: -webkit-box;
@@ -772,31 +772,31 @@ body footer > div .map_bg {
   color: #000;
 }
 
-body footer > div .map_bg h3 {
+body footer .footer_upper .map_bg h3 {
   padding: 50px 0;
   font-size: 24px;
   font-weight: bold;
 }
 
-body footer > div .map_bg p {
+body footer .footer_upper .map_bg p {
   text-align: center;
   font-size: 16px;
 }
 
-body footer > div .map_bg p:nth-child(3) {
+body footer .footer_upper .map_bg p:nth-child(3) {
   border: 1px solid #000;
   padding: 20px 100px;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
 
-body footer > div .map_bg p:nth-child(3):hover {
+body footer .footer_upper .map_bg p:nth-child(3):hover {
   border-color: #999;
   background: #444;
   color: #fff;
 }
 
-body footer > div .sitemap {
+body footer .footer_upper .sitemap {
   margin: 0 auto;
   width: 80%;
   height: 45%;
@@ -809,36 +809,36 @@ body footer > div .sitemap {
           justify-content: space-between;
 }
 
-body footer > div .sitemap h3 {
+body footer .footer_upper .sitemap h3 {
   font-size: 24px;
   padding-bottom: 30px;
 }
 
-body footer > div .sitemap:not(.support) li {
+body footer .footer_upper .sitemap:not(.support) li {
   padding-bottom: 20px;
 }
 
-body footer > div .sitemap .support > ul {
+body footer .footer_upper .sitemap .support > ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-body footer > div .sitemap .support > ul > li:first-child {
+body footer .footer_upper .sitemap .support > ul > li:first-child {
   padding-right: 30px;
 }
 
-body footer > div .sitemap .support > ul > li ul li:not(:last-child) {
+body footer .footer_upper .sitemap .support > ul > li ul li:not(:last-child) {
   padding-bottom: 20px;
 }
 
-body footer > div .sitemap .sns ul {
+body footer .footer_upper .sitemap .sns ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-body footer > div .sitemap .sns ul li {
+body footer .footer_upper .sitemap .sns ul li {
   font-size: 32px;
   padding-right: 15px;
 }
@@ -1173,5 +1173,21 @@ body footer address span {
   }
   body main .speacial .speacial_wrap .speacial_lower .coupon .confirm {
     width: 100%;
+  }
+  body footer .footer_upper .sitemap {
+    width: 100%;
+    padding-right: 0;
+  }
+  body footer .footer_upper .sitemap > div {
+    width: 24%;
+  }
+  body footer .footer_upper .sitemap .support > ul {
+    width: 100%;
+  }
+  body footer .footer_upper .sitemap .support > ul > li:first-child {
+    padding-right: 10px;
+  }
+  body footer .footer_upper .sitemap .intro {
+    text-align: center;
   }
 }
