@@ -1,11 +1,5 @@
 
-//my_menu 생성
 $(document).ready(function(){
-    $(".my_menu").load("../myMenu/index.html");
-    //a태그 새로고침 방지
-    $('a[href="#"]').click(function(e) {
-        e.preventDefault();
-    });
 
     window.addEventListener("wheel",function(e){
         e.preventDefault();
