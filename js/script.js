@@ -1,6 +1,10 @@
 
+//Jquery 원페이지 기능 
 $(document).ready(function(){
-
+    //a태그 새로고침 방지
+    $('a[href="#"]').click(function(e) {
+        e.preventDefault();
+    });
     window.addEventListener("wheel",function(e){
         e.preventDefault();
     },{ passive: false });
@@ -53,20 +57,26 @@ $(document).ready(function(){
     })
 })
 
-//TheNewest 이미지 슬라이드 !
+let winY = window.scrollY; //전체 높이
+let winX = window.innerWidth; //전체 넓이
+let winH = window.innerHeight; //뷰포트 높이
+let section = document.querySelectorAll('section'); //섹션들
 
+//TheNewest 이미지 슬라이드 !
 function ImgSlide(){
     let leftBtn = document.querySelector('.left_btn');
     let rightBtn = document.querySelector('.right_btn');
     let packedSlide = document.querySelector('.slide');
-    let imageIndex = 0;
-    let position = 0;
+    let imageIndex = 0; //이미지 번호
+    let position = 0; //얼만큼 움직이게할지 위치 값
     let imgs = document.querySelector('.new1')
     let packedSlide_Width = imgs.getBoundingClientRect();
     
+    //왼쪽버튼 누를시 이미지+패딩값(80)만큼 움직이게 하고 
+    //이미지 현재 값을 -1 감소
+    //이미지index가 0이되면 opacity 값 0.2로 변경
     function previous(){
         if(imageIndex > 0){
-            rightBtn.removeAttribute("disabled")
             position += packedSlide_Width.width+80;
             packedSlide.style.transform = `translateX(${position}px)`;
             imageIndex = imageIndex - 1;
@@ -74,13 +84,12 @@ function ImgSlide(){
             rightBtn.style.opacity = '1';
         }
         if(imageIndex == 0){
-            leftBtn.setAttribute('disabled','true')
             leftBtn.style.opacity = '0.2'
         }
     }
+
     function next(){
         if(imageIndex < 5){
-            leftBtn.removeAttribute('disable')
             position -= packedSlide_Width.width+80;
             packedSlide.style.transform = `translateX(${position}px)`
             imageIndex = imageIndex + 1;
@@ -88,12 +97,10 @@ function ImgSlide(){
             leftBtn.style.opacity = '1';
         }
         if(imageIndex == 5){
-            rightBtn.setAttribute('disable','true')
             rightBtn.style.opacity= '0.2'
         }
     }
     function init(){
-        leftBtn.setAttribute('disabled','true')
         leftBtn.addEventListener('click',previous)
         rightBtn.addEventListener('click',next)
         leftBtn.style.opacity = '0.2'
@@ -150,13 +157,59 @@ function NewProductScrollEvent(){
 NewProductScrollEvent()
 
 
+////////////////// product Effect ////////////////////
+//클론코딩
+//이미지는 계속 넘어가고 어느 일정선이 되면 뒤에 다시 생성 
+//이미지 move는 계속 작동
+// 마우스 enter 시에는 함수 정지
+const productSection = document.querySelector('.product')
+let productSectionTop
+const packed_product = document.querySelector('.packed_product');
+let packed_productPos = 0
+let timer
+let mouseCheck = false
+//top값 측정
+// window.addEventListener('scroll',function(){
+//     productSectionTop = productSection.getBoundingClientRect().top
+//     if( productSectionTop == 0){
+//         packed_product.addEventListener('mouseenter',function(){
+//             mouseCheck = true
+//             console.log(mouseCheck)
+            
+//         })
+//         packed_product.addEventListener('mouseleave',function(){
+//             mouseCheck = false
+//             console.log(mouseCheck)
+//         })
+//         if(mouseCheck == false){
+//             rightToLeft()
+//         }else{
+//             stopMove()
+//         }
+//     }
+// })
+// function rightToLeft(){
+//     timer = setInterval(function(){
+//         packed_productPos = packed_productPos + 1
+//         packed_product.style.left = `-${packed_productPos}px`
+//         console.log(mouseCheck)
+//         // if(mouseCheck == true){
+//         //     stopMove()
+//         // }
+//     },25)
+// }
+// function stopMove(){
+//     clearInterval(timer)
+// }
 
-let winY = window.scrollY;
-let winH = window.innerHeight;
+
+
+
+
+
+
 let navMenu = document.querySelectorAll('.nav_menu');
-let section = document.querySelectorAll('section');
-
-    //newsPage event
+//newsPage event
 function news(){
     let newsDate = document.querySelectorAll('.date')
     let newsText = document.querySelectorAll('.text')
@@ -164,7 +217,6 @@ function news(){
     let newsArr = document.querySelectorAll('.newsArr');
 
     let newsEffect = function(){
-        
         let initModule = function(){
             _addEventHandlers();
         }

@@ -23,6 +23,7 @@
 }
 
 body {
+  cursor: default;
   font-size: 14px;
   font-family: 'Nanum Gothic', sans-serif;
   width: 100vw;
@@ -219,6 +220,7 @@ body .new_collection > div .new_list .slide_view .slide .new {
 
 body .new_collection > div .new_list .slide_view .slide .new img {
   width: 100%;
+  cursor: pointer;
 }
 
 body .new_collection > div .new_list .slide_view .slide .new p {
@@ -260,80 +262,134 @@ body .new_collection > div .new_list_scroll_under768px {
 
 body .product {
   background: #101e29;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
+}
+
+body .product > div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-body .product ul {
-  width: 80%;
+  width: 200%;
   height: 100%;
+  position: relative;
+}
+
+body .product > div .packed_product {
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  height: 35%;
+  -webkit-transition: 1s;
+  transition: 1s;
 }
 
-body .product ul li {
-  width: 25%;
+body .product > div .packed_product .product_list {
+  width: 15%;
+  height: 100%;
   position: relative;
-  margin: 0 20px;
+  margin-right: 50px;
 }
 
-body .product ul li img {
+body .product > div .packed_product .product_list a {
   width: 100%;
 }
 
-body .product ul li div {
+body .product > div .packed_product .product_list a img {
+  width: 100%;
+  height: 100%;
+}
+
+body .product > div .packed_product .product_list .items_bg {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: block;
   position: absolute;
-  background: rgba(0, 0, 0, 0);
   top: 0;
   left: 0;
+  opacity: 0;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+body .product > div .packed_product .product_list:hover .items_bg {
+  opacity: 0.8;
+}
+
+body .product > div .packed_product .product_list .product_items_menu {
   width: 100%;
   height: 100%;
-  -webkit-transition: 0.8s;
-  transition: 0.8s;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  opacity: 0;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
-body .product ul li:hover div {
-  background: rgba(0, 0, 0, 0.7);
+body .product > div .packed_product .product_list .product_items_menu ul {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
 }
 
-body .product ul li:hover p {
+body .product > div .packed_product .product_list .product_items_menu ul li {
+  cursor: pointer;
+  position: relative;
+  width: auto;
+  text-align: center;
+  font-size: 1rem;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  color: #fff;
+}
+
+body .product > div .packed_product .product_list .product_items_menu ul li:hover::after {
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
   opacity: 1;
 }
 
-body .product ul li p {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  color: #fff;
-  font-size: 26px;
+body .product > div .packed_product .product_list .product_items_menu ul li::after {
+  display: block;
+  content: "";
+  width: 100%;
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  background: #fff;
+  height: 1px;
   opacity: 0;
-  text-decoration: underline;
-  -webkit-transition: 0.8s;
-  transition: 0.8s;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
 }
 
-body .product ul li p span {
-  display: block;
+body .product > div .packed_product .product_list:hover .product_items_menu {
+  opacity: 1;
 }
 
 body .news {

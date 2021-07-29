@@ -15,6 +15,7 @@ body {
     &::-webkit-scrollbar {
         display: none; /* Chrome, Safari, Opera*/
     }
+    cursor: default;
     font-size: 14px;
     font-family: 'Nanum Gothic', sans-serif;
     width: 100vw;
@@ -146,6 +147,7 @@ body {
                             margin: 0 40px;
                             img{
                                 width: 100%;
+                                cursor: pointer;
                             }
                             p{
                                 padding-top: 20px;
@@ -183,54 +185,93 @@ body {
     }
     .product {
         background: #101e29;
-        width: 100vw;
+        width: 100%;
         height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        ul {
-            width: 80%;
-            height: 100%;
+        >div{
             display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            li {
-                width: 25%;
-                position: relative;
-                margin: 0 20px;
-                img {
-                    width: 100%;
-                }
-                div {
-                    position: absolute;
-                    background: rgba(0, 0, 0, 0);
-                    top: 0;
-                    left: 0;
-                    width: 100%;
+            width: 200%;
+            height: 100%;
+            position: relative;
+            .packed_product {
+                position: absolute;
+                top: 50%;
+                left: 0px;
+                transform: translateY(-50%);
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                height: 35%;
+                transition: 1s;
+                .product_list{
+                    width: 15%;
                     height: 100%;
-                    transition: 0.8s;
-                }
-                &:hover {
-                    div {
-                        background: rgba(0, 0, 0, 0.7);
+                    position: relative;
+                    margin-right: 50px;
+                    a{
+                        width: 100%;
+                        img{
+                            width: 100%;
+                            height: 100%;
+                        }
                     }
-                    p {
-                        opacity: 1;
-                    }
-                }
-                p {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    color: #fff;
-                    font-size: 26px;
-                    opacity: 0;
-                    text-decoration: underline;
-                    transition: 0.8s;
-                    span {
+                    .items_bg{
+                        width: 100%;
+                        height: 100%;
+                        background: #000;
                         display: block;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        opacity: 0;
+                        transition: 0.5s;
+                    }
+                    &:hover .items_bg{
+                        opacity: 0.8;
+                    }
+                    .product_items_menu{
+                        width: 100%;
+                        height: 100%;
+                        color: #fff;
+                        position: absolute;
+                        top: 0;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        opacity: 0;
+                        transition: 0.5s;
+                        ul{
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: space-evenly;
+                            li{
+                                cursor: pointer;
+                                position: relative;
+                                width: auto;
+                                text-align: center;
+                                font-size: 1rem;
+                                transition: 0.5s;
+                                color: #fff;
+                                &:hover::after {
+                                    transform: scaleX(1);
+                                    opacity: 1;
+                                }
+                                &::after {
+                                    display: block;
+                                    content: "";
+                                    width: 100%;
+                                    transform: scaleX(0);
+                                    background: #fff;
+                                    height: 1px;
+                                    opacity: 0;
+                                    transition: 0.3s;
+                                }
+                            }
+                        }
+                    }
+                    &:hover .product_items_menu{
+                        opacity: 1;
                     }
                 }
             }
