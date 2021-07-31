@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @-webkit-keyframes speacial {
   0% {
     bottom: 50px;
@@ -10,6 +9,7 @@
     bottom: 50px;
   }
 }
+
 @keyframes speacial {
   0% {
     bottom: 50px;
@@ -39,22 +39,36 @@ body header {
   background: #000;
 }
 
-body header div {
+body header .topHeader {
   background: rgba(0, 0, 0, 0.4);
   width: 100vw;
   height: 80px;
   position: fixed;
   z-index: 5;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
-body header div h2 {
+body header .topHeader:hover {
+  background: black;
+}
+
+body header .topHeader:hover .depth_menu {
+  height: 60px;
+}
+
+body header .topHeader:hover .depth_menu li {
+  display: block;
+}
+
+body header .topHeader h2 {
   width: 100%;
   height: 80px;
   font-size: 0px;
   background: url("../images/Logo_MTB.png") center center no-repeat;
 }
 
-body header div .icon {
+body header .topHeader .icon {
   position: absolute;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
@@ -68,12 +82,45 @@ body header div .icon {
   padding-right: 10px;
 }
 
-body header div .icon li {
+body header .topHeader .icon li {
   padding: 0 10px;
 }
 
-body header div .icon i {
+body header .topHeader .icon i {
   font-size: 32px;
+}
+
+body header .topHeader .depth_menu {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  width: 100%;
+  height: 0px;
+}
+
+body header .topHeader .depth_menu ul {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: #000;
+  opacity: 0.8;
+  color: #fff;
+}
+
+body header .topHeader .depth_menu ul li {
+  display: none;
+  width: 7%;
+}
+
+body header .topHeader .depth_menu ul .menu5 {
+  margin-right: 40px;
 }
 
 body header nav {
@@ -270,7 +317,7 @@ body .product > div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 200%;
+  width: 116%;
   height: 100%;
   position: relative;
 }
@@ -281,23 +328,16 @@ body .product > div .packed_product {
   left: 0px;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   width: 100%;
   height: 35%;
-  -webkit-transition: 1s;
-  transition: 1s;
 }
 
 body .product > div .packed_product .product_list {
-  width: 15%;
+  width: 10%;
   height: 100%;
-  position: relative;
-  margin-right: 50px;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 body .product > div .packed_product .product_list a {
@@ -397,10 +437,25 @@ body .news {
   width: 100vw;
   height: 100vh;
   background: url("../images/news_bg.png") center center/cover no-repeat;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 body .news .newsPack {
   position: relative;
+  width: 100%;
+  height: 70%;
 }
 
 body .news .newsPack .newsArr {
@@ -408,6 +463,7 @@ body .news .newsPack .newsArr {
   top: 0;
   left: 10%;
   width: 80%;
+  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -419,8 +475,6 @@ body .news .newsPack .newsArr {
           justify-content: space-between;
   margin: 0 auto;
   color: #fff;
-  padding: 200px 0;
-  padding-left: 100px;
 }
 
 body .news .newsPack .newsArr .date {
@@ -459,6 +513,9 @@ body .news .newsPack .newsArr .text {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   height: 100%;
   width: 70%;
   padding: 0 60px;
@@ -469,17 +526,18 @@ body .news .newsPack .newsArr .text {
 }
 
 body .news .newsPack .newsArr .text em {
-  font-size: 42px;
+  font-size: 2.5rem;
   font-style: oblique;
 }
 
 body .news .newsPack .newsArr .text .name {
   text-align: right;
   padding-top: 20px;
+  font-size: 1rem;
 }
 
 body .news .newsPack .newsArr .text .saying {
-  font-size: 18px;
+  font-size: 1.25rem;
   line-height: 1.7;
 }
 
@@ -525,11 +583,6 @@ body .news .newsPack .news3 {
 }
 
 body .news .pageNum {
-  position: absolute;
-  bottom: 100px;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -539,6 +592,8 @@ body .news .pageNum {
   line-height: 22px;
   font-size: 14px;
   color: #fff;
+  width: 100%;
+  z-index: 1;
 }
 
 body .news .pageNum p {
@@ -911,339 +966,4 @@ body footer address {
 body footer address span {
   display: block;
   padding-top: 10px;
-}
-
-/* PC , 테블릿 가로 (해상도 768px ~ 1024px)*/
-@media (min-width: 768px) and (max-width: 1024px) {
-  body header nav {
-    width: 80px;
-  }
-  body .product ul {
-    height: 50%;
-  }
-  body .news .newsPack .newsArr .text em {
-    font-size: 30px;
-  }
-  body .speacial .speacial_wrap {
-    height: 100%;
-  }
-  body .speacial .speacial_wrap > div {
-    height: 48%;
-  }
-  body .speacial .speacial_wrap > div .present, body .speacial .speacial_wrap > div .post {
-    height: 100%;
-    padding: 0;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-  }
-  body .speacial .speacial_wrap > div .present h3 {
-    width: 70%;
-    text-align: center;
-  }
-  body .speacial .speacial_wrap .speacial_lower .new_account {
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    padding: 0;
-  }
-  body .speacial .speacial_wrap .speacial_lower .new_account h2 {
-    padding-bottom: 25px;
-  }
-  body .speacial .speacial_wrap .speacial_lower .new_account .makeAccount {
-    width: 100%;
-    height: 90px;
-    font-size: 14px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-  }
-  body .speacial .speacial_wrap .speacial_lower .coupon {
-    width: 50%;
-    padding: 0;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-  }
-  body .speacial .speacial_wrap .speacial_lower .coupon h2 {
-    width: 80%;
-    text-align: center;
-  }
-  body .speacial .speacial_wrap .speacial_lower .coupon .emailForm {
-    width: 100%;
-    height: 90px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
-  body .speacial .speacial_wrap .speacial_lower .coupon .emailForm a {
-    width: 110px;
-  }
-  body .speacial .speacial_wrap .speacial_lower .coupon .emailForm a p {
-    padding: 0;
-  }
-  body .speacial .speacial_wrap .speacial_lower .coupon .confirm {
-    width: 50%;
-    text-align: center;
-  }
-}
-
-/* 모바일 가로, 테블릿 세로 (해상도 480px ~ 767px)*/
-@media all and (min-width: 480px) and (max-width: 768px) {
-  body header nav {
-    font-size: 14px;
-    width: 30px;
-  }
-  body main .new_collection > div .new_list {
-    display: none;
-  }
-  body main .new_collection > div .new_list .slide_view .slide .new {
-    width: 100%;
-  }
-  body main .new_collection > div .new_list_scroll_under768px {
-    display: block;
-    width: 100%;
-    height: 60%;
-  }
-  body main .new_collection > div .new_list_scroll_under768px .new_list_scroll_under768px_div {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
-  body main .new_collection > div .new_list_scroll_under768px .new_list_scroll_under768px_div .scroll_view {
-    position: relative;
-    overflow: hidden;
-    width: 60%;
-    height: 90%;
-    z-index: 10;
-  }
-  body main .new_collection > div .new_list_scroll_under768px .new_list_scroll_under768px_div .scroll_view .scrollArr {
-    position: absolute;
-    top: 0px;
-    left: 0;
-    width: 100%;
-    height: 270%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    -webkit-box-pack: space-evenly;
-        -ms-flex-pack: space-evenly;
-            justify-content: space-evenly;
-    pointer-events: none;
-  }
-  body main .new_collection > div .new_list_scroll_under768px .new_list_scroll_under768px_div .scroll_view .scrollArr .scrollImg {
-    width: 40%;
-    height: 15%;
-    overflow: hidden;
-    position: relative;
-    margin-bottom: 10px;
-  }
-  body main .new_collection > div .new_list_scroll_under768px .new_list_scroll_under768px_div .scroll_view .scrollArr .scrollImg:hover .scrollBg {
-    -webkit-transform: translateX(0%);
-            transform: translateX(0%);
-  }
-  body main .new_collection > div .new_list_scroll_under768px .new_list_scroll_under768px_div .scroll_view .scrollArr .scrollImg img {
-    width: 100%;
-  }
-  body main .new_collection > div .new_list_scroll_under768px .new_list_scroll_under768px_div .scroll_view .scrollArr .scrollImg .scrollBg {
-    background: rgba(0, 0, 0, 0.5);
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: #fff;
-    font-size: 16px;
-    text-align: center;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-transform: translateX(101%);
-            transform: translateX(101%);
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-  }
-  body main .product {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
-  body main .product ul {
-    height: 85%;
-    width: 70%;
-    margin: 0 auto;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-  }
-  body main .product ul li {
-    width: 40%;
-  }
-  body main .news {
-    width: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-  }
-  body main .news .newsPack {
-    width: 80%;
-    height: 75%;
-  }
-  body main .news .newsPack .newsArr {
-    width: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    left: 0;
-    padding: 0;
-    -webkit-box-pack: none;
-        -ms-flex-pack: none;
-            justify-content: none;
-  }
-  body main .news .newsPack .newsArr .date {
-    width: 100px;
-    height: 100px;
-  }
-  body main .news .newsPack .newsArr .text {
-    width: 70%;
-  }
-  body main .news .newsPack .newsArr .text em {
-    font-size: 24px;
-  }
-  body main .news .newsPack .newsArr .text .name {
-    padding: 10px 0;
-  }
-  body main .news .newsPack .newsArr .text .name span {
-    display: block;
-  }
-  body main .news .newsPack .newsArr .text .saying {
-    font-size: 16px;
-  }
-  body main .news .newsPack .newsArr .text .saying1 {
-    padding-top: 30px;
-    padding: 10px 0;
-  }
-  body main .news .newsPack .newsArr .person {
-    width: 20%;
-  }
-  body main .news .pageNum {
-    position: inherit;
-    bottom: 0;
-    left: -20px;
-    -webkit-transform: translateX(0%);
-            transform: translateX(0%);
-  }
-  body main .speacial .speacial_wrap > div .present h3 {
-    font-size: 24px;
-  }
-  body main .speacial .speacial_wrap > div .present .present_more {
-    width: 80%;
-    height: 15%;
-    padding: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-  }
-  body main .speacial .speacial_wrap > div .post h3 {
-    font-size: 24px;
-    margin-bottom: 30px;
-  }
-  body main .speacial .speacial_wrap > div .post .post_more {
-    width: 80%;
-    height: 15%;
-    padding: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-  }
-  body main .speacial .speacial_wrap .speacial_lower .new_account .new_account_p1 {
-    padding: 0;
-    padding-top: 25px;
-    padding-bottom: 50px;
-  }
-  body main .speacial .speacial_wrap .speacial_lower .new_account .makeAccount {
-    padding: 0;
-  }
-  body main .speacial .speacial_wrap .speacial_lower .coupon {
-    padding: 0;
-  }
-  body main .speacial .speacial_wrap .speacial_lower .coupon h3 {
-    width: 80%;
-    text-align: center;
-  }
-  body main .speacial .speacial_wrap .speacial_lower .coupon .emailForm {
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    padding: 0;
-  }
-  body main .speacial .speacial_wrap .speacial_lower .coupon .confirm {
-    width: 100%;
-  }
-  body footer .footer_upper .sitemap {
-    width: 100%;
-    padding-right: 0;
-  }
-  body footer .footer_upper .sitemap > div {
-    width: 24%;
-  }
-  body footer .footer_upper .sitemap .support > ul {
-    width: 100%;
-  }
-  body footer .footer_upper .sitemap .support > ul > li:first-child {
-    padding-right: 10px;
-  }
-  body footer .footer_upper .sitemap .intro {
-    text-align: center;
-  }
 }

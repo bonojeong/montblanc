@@ -57,6 +57,14 @@ $(document).ready(function(){
     })
 })
 
+//방향키 입력막기 ! 
+window.addEventListener("keydown", function(e) {
+    // 스페이스바 && 방향키
+    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+    }
+}, false);
+
 let winY = window.scrollY; //전체 높이
 let winX = window.innerWidth; //전체 넓이
 let winH = window.innerHeight; //뷰포트 높이
@@ -110,101 +118,64 @@ function ImgSlide(){
 ImgSlide()
 
 
-///////////// 반응형 new product 드래그 이벤트/////////
-function NewProductScrollEvent(){
-    const scrollArr = document.querySelector('.scrollArr');
-    const scroll_view = document.querySelector('.scroll_view');
-    let isMouseDown = false;
-    let startY
-    let Y
-
-    scroll_view.addEventListener('mousedown', e =>{
-        isMouseDown = true;
-        startY = e.offsetY - scrollArr.offsetTop
-        scroll_view.style.cursor = 'grabbing'
-    })
-
-    scroll_view.addEventListener('mouseenter', () =>{
-        scroll_view.style.cursor="grab"
-    })
-
-    scroll_view.addEventListener('mouseup',() => {
-        scroll_view.style.cursor = 'grab'
-    })
-
-    window.addEventListener('mouseup', () => {
-        isMouseDown = false;
-    })
-    scroll_view.addEventListener('mousemove', e => {
-        if(!isMouseDown) return
-        e.preventDefault()
-        Y = e.offsetY
-        scrollArr.style.top = `${Y - startY}px`;
-        checkboundary()
-    })
-
-    function checkboundary(){
-        let outer = scroll_view.getBoundingClientRect()
-        let inner = scrollArr.getBoundingClientRect()
-
-        if(parseInt(scrollArr.style.top) > 0){
-            scrollArr.style.top = '0px'
-        }else if (inner.bottom < outer.bottom){
-            scrollArr.style.top = `-${inner.height - outer.height}px`
-        }
-    }
-}
-NewProductScrollEvent()
-
-
 ////////////////// product Effect ////////////////////
-//클론코딩
 //이미지는 계속 넘어가고 어느 일정선이 되면 뒤에 다시 생성 
 //이미지 move는 계속 작동
 // 마우스 enter 시에는 함수 정지
-const productSection = document.querySelector('.product')
-let productSectionTop
-const packed_product = document.querySelector('.packed_product');
+
+//1~6개 지정하고 한 묶음 움직인 값 측정해서 도달하면 뒤에 새롭게 복사
+//움직인 값 0으로 초기화
+let productSectionTop // product Y위치 값
 let packed_productPos = 0
-let timer
-let mouseCheck = false
-//top값 측정
-// window.addEventListener('scroll',function(){
-//     productSectionTop = productSection.getBoundingClientRect().top
-//     if( productSectionTop == 0){
-//         packed_product.addEventListener('mouseenter',function(){
-//             mouseCheck = true
-//             console.log(mouseCheck)
-            
-//         })
-//         packed_product.addEventListener('mouseleave',function(){
-//             mouseCheck = false
-//             console.log(mouseCheck)
-//         })
-//         if(mouseCheck == false){
-//             rightToLeft()
-//         }else{
-//             stopMove()
-//         }
-//     }
-// })
-// function rightToLeft(){
-//     timer = setInterval(function(){
-//         packed_productPos = packed_productPos + 1
-//         packed_product.style.left = `-${packed_productPos}px`
-//         console.log(mouseCheck)
-//         // if(mouseCheck == true){
-//         //     stopMove()
-//         // }
-//     },25)
-// }
-// function stopMove(){
-//     clearInterval(timer)
-// }
+let move
+let lastImg
 
 
-
-
+window.onload = function(){
+    let packed_product = document.querySelector('.packed_product');
+    let product_list = document.querySelectorAll('.product_list')
+    //이미지 하나의 넓이 값
+    let product_list_width = product_list[1].getBoundingClientRect().width
+    //각각의 이미지를 옆으로 나열
+    product_list.forEach ( (element, index) => {
+        element.style.left = `${product_list_width * index}px`
+    })
+    rightToLeft()
+    function rightToLeft(){
+        //[0]~[5]넓이 만큼 움직였으면
+        //지나갔던 [0]~[5] 는 삭제하고
+        //감싸고있는 div 에 append로 [0]~[5] 를 똑같이 생성
+        //그러고 감싸고있는 div left를 0으로 변경
+        //그러고 이미지 전체를 재선언
+        move = setInterval(function(){
+            packed_productPos++ // 위치값 1씩 이동
+            //left 이동
+            packed_product.style.left = `-${packed_productPos}px`
+            if(packed_productPos == Math.floor(product_list_width*6)){
+                for(let i=0; i <= 6; i++){
+                    //지나간거 삭제
+                    packed_product.removeChild(product_list[i]);
+                    //노드 복사
+                    lastImg = product_list[i].cloneNode(true);
+                    //복사후에 생성
+                    packed_product.appendChild(lastImg)
+                }
+                //left 0으로 초기화
+                packed_productPos = 0
+                //변수값 재설정
+                product_list = document.querySelectorAll('.product_list')
+            }
+        },25)
+    }
+    // 멈추게하기
+    function stopMove(){
+        clearInterval(move)
+    }
+    // 마우스올리면 멈춤
+    packed_product.addEventListener('mouseenter',stopMove)
+     //마우스 빼면 다시움직임
+    packed_product.addEventListener('mouseleave',rightToLeft)
+}
 
 
 
@@ -215,70 +186,74 @@ function news(){
     let newsText = document.querySelectorAll('.text')
     let newsPerson = document.querySelectorAll('.person')
     let newsArr = document.querySelectorAll('.newsArr');
-
+    let currentPage = 0;
     let newsEffect = function(){
-        let initModule = function(){
-            _addEventHandlers();
-        }
-        let _addEventHandlers = function(){
-            window.addEventListener('scroll', _checkPosition);
-            window.addEventListener("load", _checkPosition);
-            window.addEventListener("resize", initModule);
-        }
-        var _checkPosition = function () {
-            for (var i = 0; i < section.length; i++) {
-            var posFromTop = section[3].getBoundingClientRect().top;
-            if (winH > posFromTop+500) {
-                newsDate[0].classList.add('newsEffect');
-                newsText[0].classList.add('newsEffect');
-                newsPerson[0].classList.add('newsEffect');
+        //스크롤 감지
+        window.addEventListener('scroll', function(){
+            for (let i = 0; i < section.length; i++) {
+                //섹션3의 탑값
+                let posFromTop = section[3].getBoundingClientRect().top;
+                //top == 0 일때 현재페이지 번호 가져와서 효과이펙트
+                if (posFromTop == 0 ) {
+                    newsDate[currentPage].classList.add('newsEffect');
+                    newsText[currentPage].classList.add('newsEffect');
+                    newsPerson[currentPage].classList.add('newsEffect');
+                    //0 이 아니면 효과 제거
+                }else{
+                    newsDate[currentPage].classList.remove('newsEffect');
+                    newsText[currentPage].classList.remove('newsEffect');
+                    newsPerson[currentPage].classList.remove('newsEffect');
+                }
             }
-            }
-        }
-        return {
-            init: initModule
-        }
+        });
     }
-    newsEffect().init();
-
-
+    newsEffect()
 //페이지 넘기기
     function newsPage(){
         let prevBtn = document.querySelector('.news_left');
         let nextBtn = document.querySelector('.news_right');
-        let currentPage = 0;
+        //현재페이지 인덱스넘버
+        currentPage = 0;
+        //현재페이지
         let currentPageNum = 1;
         let pageNum = document.querySelector('.pageNum p');
+        //이전 버튼 눌렀을 때 함수
         function newPrevPage(){
+            //현재 페이지가 0이상일때
             if(currentPage > 0){
-                nextBtn.removeAttribute('disable')
+                //버튼 스타일 변경(초기화)
                 prevBtn.style.opacity = '1';
                 nextBtn.style.opacity = '1';
+                //현재페이지 index와 번호 변경
                 currentPage = currentPage - 1;
                 currentPageNum = currentPageNum - 1;
+                //클래스 붙여서 모션 주기
                 newsDate[currentPage+1].classList.remove('newsEffect');
                 newsText[currentPage+1].classList.remove('newsEffect');
                 newsPerson[currentPage+1].classList.remove('newsEffect');
                 newsDate[currentPage].classList.add('newsEffect');
                 newsText[currentPage].classList.add('newsEffect');
                 newsPerson[currentPage].classList.add('newsEffect');
+                //페이지 넘버에 맞게 텍스트 띄우기
                 pageNum.textContent = `${currentPageNum} / ${newsArr.length}`
-                console.log(currentPage)
             }
+            //페이지 인덱스가 0이면 버튼 스타일 변경
             if(currentPage == 0){
-                prevBtn.setAttribute('disable','true')
                 prevBtn.style.opacity = '0.2'
-                console.log(currentPage)
             }
         }
+        //다음버튼 눌렀을 때
         function newNextPage(){
-            if(currentPage < 4 ){
-                prevBtn.removeAttribute('disable')
+            //현재페이지가 전체길이보다 작을때
+            if(currentPage < newsArr.length-1 ){
+                //스타일변경
                 nextBtn.style.opacity = '0.2'
                 prevBtn.style.opacity = '1';
                 nextBtn.style.opacity = '1';
+                //index와 번호 +1 
                 currentPage = currentPage + 1;
                 currentPageNum = currentPageNum+1
+                //클래스 추가,제거로 모션주기
                 newsDate[currentPage-1].classList.remove('newsEffect');
                 newsText[currentPage-1].classList.remove('newsEffect');
                 newsPerson[currentPage-1].classList.remove('newsEffect');
@@ -286,18 +261,16 @@ function news(){
                 newsText[currentPage].classList.add('newsEffect');
                 newsPerson[currentPage].classList.add('newsEffect');
                 pageNum.textContent = `${currentPageNum} / ${newsArr.length}`
-                console.log(currentPage)
             }
-            if(currentPage == 4){
-                nextBtn.setAttribute('disable','true')
+            //마지막 페이지가 되면 버튼스타일 변경
+            if(currentPage == newsArr.length-1){
                 nextBtn.style.opacity = '0.2'
-                console.log(currentPage)
             }
         }
+        //처음일때
         function init(){
             nextBtn.addEventListener('click',newNextPage);
             prevBtn.addEventListener('click',newPrevPage);
-            prevBtn.setAttribute('disabled','ture')
             prevBtn.style.opacity = '0.2'
             pageNum.textContent = `${currentPageNum} / ${newsArr.length}`
         }

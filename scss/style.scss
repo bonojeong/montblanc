@@ -22,12 +22,22 @@ body {
     height: 100vh;
     header {
         background: #000;
-        div {
+        .topHeader {
             background: rgba(0, 0, 0, 0.4);
             width: 100vw;
             height: 80px;
             position: fixed;
             z-index: 5;
+            transition: 0.5s;
+            &:hover{
+                background: rgba(0, 0, 0, 1);
+            }
+            &:hover .depth_menu{
+                height: 60px;
+            }
+            &:hover .depth_menu li {
+                display: block;
+            }
             h2{
                 width: 100%;
                 height: 80px;
@@ -48,6 +58,28 @@ body {
                 }
                 i {
                     font-size: 32px;
+                }
+            }
+            .depth_menu{
+                transition: 0.3s;
+                width: 100%;
+                height: 0px;
+                ul{
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background: #000;
+                    opacity: 0.8;
+                    color: #fff;
+                    li{
+                        display: none;
+                        width: 7%;
+                    }
+                    .menu5{
+                        margin-right: 40px;
+                    }
                 }
             }
         }
@@ -189,7 +221,7 @@ body {
         height: 100vh;
         >div{
             display: flex;
-            width: 200%;
+            width: 116%;
             height: 100%;
             position: relative;
             .packed_product {
@@ -197,16 +229,14 @@ body {
                 top: 50%;
                 left: 0px;
                 transform: translateY(-50%);
-                display: flex;
-                justify-content: space-between;
                 width: 100%;
                 height: 35%;
-                transition: 1s;
                 .product_list{
-                    width: 15%;
+                    width: 10%;
                     height: 100%;
-                    position: relative;
-                    margin-right: 50px;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
                     a{
                         width: 100%;
                         img{
@@ -274,6 +304,7 @@ body {
                         opacity: 1;
                     }
                 }
+
             }
         }
     }
@@ -282,20 +313,25 @@ body {
         width: 100vw;
         height: 100vh;
         background: url("../images/news_bg.png")center center/cover no-repeat;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         .newsPack{
             position: relative;
+            width: 100%;
+            height: 70%;
             .newsArr {
             position: absolute;
             top: 0;
             left: 10%;
             width: 80%;
+            height: 100%;
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
             margin: 0 auto;
             color: #fff;
-            padding: 200px 0 ;
-            padding-left: 100px;
             .date {
                 background-color: #fff;
                 color: #000;
@@ -322,21 +358,23 @@ body {
                 opacity: 0;
                 display: flex;
                 flex-direction: column;
+                justify-content: flex-start;
                 height: 100%;
                 width: 70%;
                 padding: 0 60px;
                 transition: 0.8s;
                 transform: translateY(50%);
                 em {
-                    font-size: 42px;
+                    font-size: 2.5rem;
                     font-style: oblique;
                 }
                 .name {
                     text-align: right;
                     padding-top: 20px;
+                    font-size: 1rem;
                 }
                 .saying {
-                    font-size: 18px;
+                    font-size: 1.25rem;
                     line-height: 1.7;
                 }
                 .saying1 {
@@ -373,15 +411,13 @@ body {
             }
         }
         .pageNum {
-            position: absolute;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
             display: flex;
             justify-content: center;
             line-height: 22px;
             font-size: 14px;
             color: #fff;
+            width: 100%;
+            z-index: 1;
             p {
                 padding: 0 80px;
             }
@@ -653,329 +689,6 @@ body {
             span {
                 display: block;
                 padding-top: 10px;
-            }
-        }
-    }
-}
-
-/* PC , 테블릿 가로 (해상도 768px ~ 1024px)*/
-@media (min-width:768px) and (max-width:1024px) {
-    body{
-        header{ 
-            nav {
-                width: 80px;
-            } 
-        }
-        .product{
-            ul{
-                height: 50%;
-            }
-        }
-        .news{
-            .newsPack {
-                .newsArr{
-                    .text{
-                        em{
-                            font-size: 30px;
-                        }
-                    } 
-                } 
-            }
-        }
-        .speacial{
-            .speacial_wrap{
-                height: 100%;
-                > div{
-                    height: 48%;
-                    .present, .post{
-                        height: 100%;
-                        padding: 0;
-                        justify-content: center;
-                    }
-                    .present{  
-                        h3{
-                            width: 70%;
-                            text-align: center;
-                        }
-                    }
-                }
-                .speacial_lower{
-                    .new_account{
-                        justify-content: center;
-                        padding: 0;
-                        h2{
-                            padding-bottom: 25px;
-                        }
-                        .makeAccount{
-                            width: 100%;
-                            height: 90px;
-                            font-size: 14px;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                        }
-                    }
-                    .coupon{
-                        width: 50%;
-                        padding: 0;
-                        justify-content: center;
-                        h2{
-                            width: 80%;
-                            text-align: center;
-                        }
-                        .emailForm{
-                            width: 100%;
-                            height: 90px;
-                            display: flex;
-                            align-items: center;
-                            a{
-                                width: 110px;
-                                p{
-                                    padding: 0;
-                                }
-                            }
-                        }
-                        .confirm{
-                            width: 50%;
-                            text-align: center;
-                        }
-                    }
-                }
-            }
-        }
-    }
-        
-
-}
-/* 모바일 가로, 테블릿 세로 (해상도 480px ~ 767px)*/ 
-@media all and (min-width:480px) and (max-width:768px) {
-    body{
-        header{ 
-            nav {
-                font-size: 14px;
-                width: 30px;
-            } 
-        }
-        main{
-            .new_collection{
-                >div{
-                    .new_list{
-                        display: none;
-                        .slide_view{
-                            .slide{
-                                .new{
-                                    width: 100%;
-                                }
-                            }
-                        }
-                    }
-                    .new_list_scroll_under768px {
-                        display: block;
-                        width: 100%;
-                        height: 60%;
-                        .new_list_scroll_under768px_div{
-                            display: flex;
-                            width: 100%;
-                            height: 100%;
-                            justify-content: center;
-                            align-items: center;
-                            .scroll_view{
-                                position: relative;
-                                overflow: hidden;
-                                width: 60%;
-                                height: 90%;
-                                z-index: 10;
-                                .scrollArr{
-                                    position: absolute;
-                                    top: 0px;
-                                    left: 0;
-                                    width: 100%;
-                                    height: 270%;
-                                    display: flex;
-                                    flex-wrap: wrap;
-                                    justify-content: space-evenly;
-                                    pointer-events: none;
-                                    .scrollImg{
-                                        width: 40%;
-                                        height: 15%;
-                                        overflow: hidden;
-                                        position: relative;
-                                        margin-bottom: 10px;
-                                        // pointer-events: auto;
-                                        &:hover .scrollBg{
-                                            transform: translateX(0%);   
-                                        }
-                                        img{
-                                            width: 100%;
-                                        }
-                                        .scrollBg{
-                                            background: rgba(0, 0, 0, 0.5);
-                                            width: 100%;
-                                            height: 100%;
-                                            position: absolute;
-                                            top: 0;
-                                            left: 0;
-                                            color: #fff;
-                                            font-size: 16px;
-                                            text-align: center;
-                                            display: flex;
-                                            align-items: center;
-                                            transform: translateX(101%);
-                                            transition: 0.5s;
-                                        }
-                                    }
-
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            .product {  
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                ul {
-                    height: 85%;
-                    width: 70%;
-                    margin: 0 auto;
-                    display: flex;
-                    li{
-                        width: 40%;
-                    }
-                }
-            }
-            .news {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                .newsPack{
-                    width: 80%;
-                    height: 75%;
-                    // margin: 0 auto;
-                    .newsArr{
-                        width: 100%;
-                        display: flex;
-                        left: 0;
-                        padding: 0;
-                        justify-content: none;
-                        .date{
-                            width: 100px;
-                            height: 100px;
-                        }
-                        .text{
-                            width: 70%;
-                            em{
-                                font-size: 24px;
-                            }
-                            .name {
-                                padding: 10px 0;
-                                span{
-                                    display: block;
-                                }
-                            }
-                            .saying{
-                                font-size: 16px;
-                            }
-                            .saying1{
-                                padding-top: 30px;
-                                padding: 10px 0 ;
-                            }
-                        }
-                        .person{
-                            width: 20%;
-                        }
-                    }
-                }
-                .pageNum {
-                    position: inherit;
-                    bottom: 0;
-                    left: -20px;
-                    transform: translateX(0%);
-                }
-            }
-            .speacial{
-                .speacial_wrap{
-                    > div{
-                        .present{
-                            h3{
-                                font-size: 24px;
-                            }
-                            .present_more{
-                                width: 80%;
-                                height: 15%;
-                                padding: 0;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                            }
-                        }
-                        .post{
-                            h3{
-                                font-size: 24px;
-                                margin-bottom: 30px;
-                            }
-                            .post_more{
-                                width: 80%;
-                                height: 15%;
-                                padding: 0;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                            }
-                        }
-                    }
-                    .speacial_lower{
-                        .new_account{
-                            .new_account_p1{
-                                padding: 0 ;
-                                padding-top: 25px;
-                                padding-bottom: 50px;
-                            }
-                            .makeAccount{
-                                padding: 0;
-                            }
-                        }
-                        .coupon{
-                            padding: 0;
-                            h3{
-                                width: 80%;
-                                text-align: center;
-                            }
-                            .emailForm{
-                                justify-content: center;
-                                padding: 0;
-                            }
-                            .confirm{
-                                width: 100%;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        footer{
-            .footer_upper{
-                .sitemap{
-                    width: 100%;
-                    padding-right: 0;
-                    >div {
-                        width: 24%;
-                    }
-                    .support{
-                        >ul {
-                            width: 100%;
-                            > li:first-child {
-                                padding-right: 10px;
-                            }
-                        }
-                    }
-                    .intro{
-                        text-align: center;
-                    }
-                }
             }
         }
     }
