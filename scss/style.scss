@@ -113,6 +113,9 @@ body {
         }
     }
     .visual {
+        >h2{
+            display: none;
+        }
         height: 100vh;
         video {
             width: 100vw;
@@ -219,6 +222,9 @@ body {
         background: #101e29;
         width: 100%;
         height: 100vh;
+        >h2{
+            display: none;
+        }
         >div{
             display: flex;
             width: 116%;
@@ -317,6 +323,9 @@ body {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        >h2 {
+            display: none;
+        }
         .newsPack{
             position: relative;
             width: 100%;

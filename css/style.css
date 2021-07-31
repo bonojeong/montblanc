@@ -168,6 +168,10 @@ body .visual {
   height: 100vh;
 }
 
+body .visual > h2 {
+  display: none;
+}
+
 body .visual video {
   width: 100vw;
   height: 100vh;
@@ -313,6 +317,10 @@ body .product {
   height: 100vh;
 }
 
+body .product > h2 {
+  display: none;
+}
+
 body .product > div {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -450,6 +458,10 @@ body .news {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+body .news > h2 {
+  display: none;
 }
 
 body .news .newsPack {
